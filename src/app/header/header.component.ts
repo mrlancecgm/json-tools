@@ -6,7 +6,7 @@ import { Component, OnInit, DoCheck, SimpleChanges, OnChanges } from '@angular/c
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, DoCheck, OnChanges {
+export class HeaderComponent implements OnInit{
   
   public dateToday?: Date;
 
@@ -16,18 +16,5 @@ export class HeaderComponent implements OnInit, DoCheck, OnChanges {
   ngOnInit(): void {    
   }
 
-  setTime() {
-    this.dateToday= new Date();
-  }
-
-  ngDoCheck(): void {
-    this.setTime();
-    window.setInterval(this.setTime, 1000);
-  }
-  
-  ngOnChanges(changes: SimpleChanges) {
-    this.dateToday = changes['dateToday'].currentValue;
-    console.log("Date: ", this.dateToday);
-  }
 
 }

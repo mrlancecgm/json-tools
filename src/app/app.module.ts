@@ -14,6 +14,12 @@ import { HoverHighlightDirective } from './shared/directives/hover-highlight.dir
 import { StructuralDirectivesComponent } from './main/structural-directives/structural-directives.component';
 import { CustomerModule } from './customer/customer.module';
 import { CommonModule, DatePipe } from '@angular/common';
+import { ConverterComponent } from './main/converter/converter.component';
+import { ExceljsonComponent } from './main/exceljson/exceljson.component';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -27,14 +33,18 @@ import { CommonModule, DatePipe } from '@angular/common';
     AttributeDirectivesComponent,
     HoverHighlightDirective,
     StructuralDirectivesComponent,
+    ConverterComponent,
+    ExceljsonComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     CommonModule,
-    CustomerModule
+    CustomerModule,
+
   ],
-  providers: [DatePipe, Clipboard],
-  bootstrap: [AppComponent]
+  providers: [DatePipe],
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

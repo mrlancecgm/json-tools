@@ -1,8 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
-/* Global Styles */
-
 * {
-  font-family: "Roboto", Arial, sans-serif;
+  font-family: 'Roboto', Arial, sans-serif;
   color: black;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -13,10 +10,6 @@ body {
   margin: 0;
 }
 
-.pa-1{
-  padding: 10px;
-}
-
 h1 {
   font-size: 32px;
 }
@@ -25,15 +18,12 @@ h2 {
   font-size: 20px;
 }
 
-h1,
-h2 {
+h1, h2 {
   font-weight: lighter;
 }
 
 p {
   font-size: 14px;
-  margin-bottom: 2px;
-  margin-top: 2px;
 }
 
 /* Hyperlink */
@@ -54,16 +44,20 @@ a:hover {
 }
 
 .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
   padding: 10px 30px;
+  
 }
 
 .header-btn {
   border: none;
-  background-color: #f8a33b;
-  color: #ffffff;
+  background-color: #F8A33B;
+  color: #FFFFFF;
   font-size: 16px;
-  text-decoration: none;
+  text-decoration: none;   
 }
 
 .header-btn b {
@@ -72,6 +66,7 @@ a:hover {
 
 .header-img {
   height: 58px;
+
 }
 
 .date-section {
@@ -84,35 +79,25 @@ a:hover {
 
 .btn-primary {
   border: none;
-  background-color: #043927;
-  color: #ffffff;
-  font-size: 16px;
-  width: 100%;
-  padding: 3px;
+  background-color: #013617;
+  color: #FFFFFF;
+  font-size: 60px;
+  width:85%;
+  padding:70px;
   border-radius: 3px;
-  text-decoration: none;
-}
-
-.btn-secondary {
-  border: none;
-  background-color: #084631;
-  color: #ffffff;
-  font-size: 16px;
-  width: 100%;
-  padding: 3px;
-  border-radius: 3px;
-  text-decoration: none;
+  text-decoration: none;    
+  
 }
 
 .btn-grey {
   border: none;
   background-color: grey;
-  color: #ffffff;
+  color: #FFFFFF;
   font-size: 16px;
-  width: 100%;
-  padding: 3px;
+  width:100%;
+  padding:3px;
   border-radius: 3px;
-  text-decoration: none;
+  text-decoration: none;    
 }
 
 .input-default {
@@ -123,39 +108,16 @@ a:hover {
 
 .text-field {
   width: 100%;
-  height: 300px;
+  height: 600px;
   padding: 5px;
   //height: auto;
   border-radius: 5px !important;
   text-align: left;
   font-weight: 500;
-}
-
-.text-field-two {
-  width: 100%;
-  height: 100%;
-  padding: 5px;
-  font-size: larger;
-  border-radius: 5px !important;
-  text-align: left;
-  font-weight: 500;
-}
-
-.progress {
-  height: 20px;
-  margin-top: 10px;
-}
-
-.progress-bar {
-  background-color: #007bff;
-}
+  }
 
 .title-container {
   align-items: center;
-}
-
-.ma-1 {
-  margin: 10px;
 }
 
 .mr-1 {
@@ -168,35 +130,21 @@ a:hover {
 
 .mb-1 {
   margin-bottom: 10px;
-}
+}  
 
 .col-12 {
   width: 100%;
   padding: 2px;
+  display: flex;
+  justify-content: center;
 }
 
 .col-3 {
   width: 25%;
 }
 
-.col-6 {
-  width: 50%;
-}
-
-.col-7-2 {
-  width: 60%;
-}
-
-.col-8-4 {
-  width: 70%;
-}
-
 .col-9 {
   width: 75%;
-}
-
-.col-9-6 {
-  width: 80%;
 }
 
 .col-auto {
@@ -211,32 +159,9 @@ a:hover {
   padding-right: 3px;
 }
 
-.length-result-two {
-  font-size: 100px;
-  color: #043927;
-  font-weight: 900;
-  padding-right: 3px;
-}
-
-.row-center {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.row-end {
-  display: inline-flex;
-  justify-content: end;
-}
-
-.row-between {
-  display: inline-flex;
-  justify-content: space-between;
-}
-
-.row-around {
-  display: inline-flex;
-  justify-content: space-around;
+.row{
+  display: flex;
+  align-items: flex-start;
 }
 
 .results-box {
@@ -253,8 +178,7 @@ a:hover {
   transition: background 0.8s;
 }
 .ripple:hover {
-  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%)
-    center/15000%;
+  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
 }
 .ripple:active {
   background-color: #6eb9f7;
@@ -281,8 +205,6 @@ app-header h1 {
 
 app-main {
   display: flex;
-  height: 100vh;
-  width: 100%;
   flex-direction: column;
   padding: 0 16px;
 }
@@ -292,12 +214,11 @@ app-footer {
   height: 30px;
   background-color: #d6d6d6;
   padding: 16px;
-  display: flex;
-  position: static;
-  bottom: 0%;
-  margin-top: auto;
+  display:flex;
+  position: absolute;
+  bottom: 0px;
+  margin-top: 20px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-

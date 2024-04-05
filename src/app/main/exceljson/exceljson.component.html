@@ -1,0 +1,47 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="row">
+      <div class="col-9">
+        <textarea
+          class="form-control text-field"
+          rows="10"
+          [value]="jsonPreview"
+          readonly
+        ></textarea>
+      </div>
+  
+      <div class="col-3 d-flex flex-column align-items-end">
+        <div class="col-12">
+          <input
+            type="file"
+            (change)="onFileChange($event)"
+            style="display: none"
+            #fileInput
+            accept=".xlsx"
+          />
+          <a class="btn btn-primary ml-1 ripple" (click)="fileInput.click()">
+            <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i>
+            <span class="d-none d-sm-inline-block" style="color: white;">Upload File</span>
+          </a>
+        </div>
+        <div class="col-12 mt-1">
+          <a class="btn btn-primary ml-1 ripple" *ngIf="jsonPreview" (click)="downloadJson()">
+            <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i>
+            <span class="d-none d-sm-inline-block" style="color: white;">Download JSON File</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12">
+        <b>RESULTS</b>
+     
+      <div class="col-12">
+        <div class="length-result">
+          {{ countResult }}
+        </div>
+          Data has been found from your Excel File.
+      </div>
+      </div>
+    </div>
+  </div>
+  
