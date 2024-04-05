@@ -1,0 +1,56 @@
+<div style="display: inline-flex; flex-direction: row">
+  <img
+    class="mr-1"
+    src="assets/images/logo/user_logo.png"
+    style="width: 50px; height: 50px"
+  />
+  <div *ngIf="isUserLoggedIn">
+    <div class="ml-1">Welcome,</div>
+    <div class="ml-1" style="font-size: 20px">
+      <b>{{ fullName }}!</b>
+    </div>
+  </div>
+</div>
+
+<div style="display: inline; flex-direction: row">
+  <div [ngSwitch]="status" style="margin-left: 5px">
+    <div *ngSwitchCase="statuses[0]" style="color: #043927">User Active</div>
+    <div *ngSwitchCase="statuses[1]" style="color: red">User Inactive</div>
+    <div *ngSwitchDefault>User status is Unknown</div>
+  </div>
+
+  <div class="ml-1 mb-1">
+    <button *ngIf="status !== 'active'" (click) = "setToActive()">Change Status</button>
+    <button *ngIf="status === 'active'" (click) = "setToInactive()">Change Status</button>
+  </div>
+</div>
+
+<!-- <div style="display:inline-block; flex-direction: row">
+    <div>
+      <ul>
+        <li *ngFor="let customer of customers">
+          {{ customer.lastName }}, {{ customer.firstName }} - {{ customer.age }}
+        </li>
+      </ul>
+    </div>
+  </div>     -->
+
+<table style="display: inline">
+  <caption>
+    <b>CUSTOMERS</b>
+  </caption>
+  <thead>
+    <tr>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customers">
+      <td>{{ customer.lastName }}</td>
+      <td>{{ customer.firstName }}</td>
+      <td>{{ customer.age }}</td>
+    </tr>
+  </tbody>
+</table>

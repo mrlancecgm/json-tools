@@ -1,0 +1,303 @@
+/* You can add global styles to this file, and also import other style files */
+/* Global Styles */
+
+* {
+  font-family: "Roboto", Arial, sans-serif;
+  color: black;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+}
+
+.pa-1{
+  padding: 10px;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h1,
+h2 {
+  font-weight: lighter;
+}
+
+p {
+  font-size: 14px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+}
+
+/* Hyperlink */
+
+a {
+  cursor: pointer;
+  color: #1976d2;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+.search-box {
+  border-color: none;
+  border-radius: 5px;
+}
+
+.btn {
+  border-radius: 5px;
+  padding: 10px 30px;
+}
+
+.header-btn {
+  border: none;
+  background-color: #f8a33b;
+  color: #ffffff;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.header-btn b {
+  color: #043927;
+}
+
+.header-img {
+  height: 58px;
+}
+
+.date-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  background-color: #4e6703;
+  opacity: inherit;
+}
+
+.btn-primary {
+  border: none;
+  background-color: #043927;
+  color: #ffffff;
+  font-size: 16px;
+  width: 100%;
+  padding: 3px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  border: none;
+  background-color: #084631;
+  color: #ffffff;
+  font-size: 16px;
+  width: 100%;
+  padding: 3px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.btn-grey {
+  border: none;
+  background-color: grey;
+  color: #ffffff;
+  font-size: 16px;
+  width: 100%;
+  padding: 3px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.input-default {
+  border: none;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.text-field {
+  width: 100%;
+  height: 300px;
+  padding: 5px;
+  //height: auto;
+  border-radius: 5px !important;
+  text-align: left;
+  font-weight: 500;
+}
+
+.text-field-two {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  font-size: larger;
+  border-radius: 5px !important;
+  text-align: left;
+  font-weight: 500;
+}
+
+.progress {
+  height: 20px;
+  margin-top: 10px;
+}
+
+.progress-bar {
+  background-color: #007bff;
+}
+
+.title-container {
+  align-items: center;
+}
+
+.ma-1 {
+  margin: 10px;
+}
+
+.mr-1 {
+  margin-right: 10px;
+}
+
+.mt-1 {
+  margin-top: 10px;
+}
+
+.mb-1 {
+  margin-bottom: 10px;
+}
+
+.col-12 {
+  width: 100%;
+  padding: 2px;
+}
+
+.col-3 {
+  width: 25%;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.col-7-2 {
+  width: 60%;
+}
+
+.col-8-4 {
+  width: 70%;
+}
+
+.col-9 {
+  width: 75%;
+}
+
+.col-9-6 {
+  width: 80%;
+}
+
+.col-auto {
+  width: auto;
+}
+
+.length-result {
+  font-size: 100px;
+  color: #043927;
+  font-weight: 900;
+  width: auto;
+  padding-right: 3px;
+}
+
+.length-result-two {
+  font-size: 100px;
+  color: #043927;
+  font-weight: 900;
+  padding-right: 3px;
+}
+
+.row-center {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-end {
+  display: inline-flex;
+  justify-content: end;
+}
+
+.row-between {
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+.row-around {
+  display: inline-flex;
+  justify-content: space-around;
+}
+
+.results-box {
+  border: 100%;
+  border-style: solid;
+  // border-width: 50px;
+  border-color: black;
+  position: relative;
+}
+
+/* Ripple effect */
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+.ripple:hover {
+  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%)
+    center/15000%;
+}
+.ripple:active {
+  background-color: #6eb9f7;
+  background-size: 100%;
+  transition: background 0s;
+}
+
+app-header {
+  width: 100%;
+  height: 68px;
+  background-color: #043927;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+app-header h1 {
+  color: white;
+  margin: 0;
+}
+
+app-main {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  padding: 0 16px;
+}
+
+app-footer {
+  width: 100%;
+  height: 30px;
+  background-color: #d6d6d6;
+  padding: 16px;
+  display: flex;
+  position: static;
+  bottom: 0%;
+  margin-top: auto;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+

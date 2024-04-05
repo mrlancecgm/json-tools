@@ -1,0 +1,16 @@
+<p><strong>Input Data:</strong> {{ inputData }}</p>
+
+<p><b>Counter: </b> {{ counter }}</p>
+
+<div class = "row">
+    <h4 style="display: inline">{{ title }}</h4>
+    <a
+        (click)="sendMessage()">
+        Change Title
+    </a>
+</div>
+
+<div class="mt-1">
+    <input [(ngModel)]="fullName"/>
+    <h1>{{fullName}}</h1>
+</div>

@@ -1,0 +1,33 @@
+<div
+  [ngClass]="{ highlight: isHighlighted }"
+  style="justify-content: space-between"
+>
+  <p *ngIf="!isHighlighted" style="display: inline" class="mr-1">
+    <b>White</b>
+  </p>
+  <p *ngIf="isHighlighted" style="display: inline" class="mr-1">
+    <b>Yellow</b>
+  </p>
+  <button
+    class="btn btn-primary"
+    (click)="toggleHighlight()"
+    *ngIf="!isHighlighted"
+  >
+    Click to turn Yellow!
+  </button>
+  <button
+    class="btn btn-primary"
+    (click)="toggleHighlight()"
+    *ngIf="isHighlighted"
+  >
+    Click to return to White!
+  </button>
+</div>
+
+<div [ngStyle]="textStyle">
+  <p [ngStyle]="textStyle">Testing</p>
+</div>
+
+<div appHoverHighlight>
+  <p>Hover to reveal color!</p>
+</div>

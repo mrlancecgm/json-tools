@@ -1,0 +1,106 @@
+<!--Initial Display-->
+<div class="row-center" *ngIf="showInitialDisplay && (!formatOneActive && !formatTwoActive)" style="margin-top: auto;margin-bottom: auto;">
+    <div class="col-auto" style="display: inline-block;">    
+      <div class="row-around">
+        <img src="assets/images/logo/json_logo.png" width="50%"/>     
+      </div>      
+      <h1 class="ma-1" style="color:#043927; font-weight: 700;text-align: center;">JSON DATA COUNTER</h1>
+      <button class="btn-primary ripple mb-1" (click)="activateFormatOne()" style="height: 50px;">Paste and Count</button>
+      <button class="btn-primary ripple m-1" style="height: 50px;" (click)="activateUploadCountDisplay()">Upload and Count</button>
+    </div>
+</div>
+<!--Initial Display-->
+
+<div style="display: inline-flex;" *ngIf="formatOneActive || formatTwoActive">
+  <div class="col-6">
+    Paste your JSON below.
+  </div>  
+  <div class="col-6 row-end">
+    <div class="mb-1">
+      <button style="margin-right:3px;" (click)="activateFormatTwo()">Change Format</button>
+      <button (click)="pasteFromClipboard()">Paste</button>
+    </div>
+  </div>    
+</div>
+
+<!--PASTE AND COUNT-->
+<!--Format ONE-->
+<div class="col-12" *ngIf="formatOneActive">
+  <textarea class="text-field" #jsonInput id="jsonTextArea" value=""></textarea>
+  <button class="btn-primary ripple" (click)="getCount()">Start Counting!</button>
+  <button class="btn-secondary ripple" style="margin-top: 5px;" (click)="activateUploadCountDisplay()">Load File Instead</button>
+  <button class="btn-grey ripple" style="margin-top: 5px;" (click)="startOver($event); jsonInput.value=''">Start Over</button>
+</div>
+
+<br/>
+  <b *ngIf="formatOneActive">RESULTS</b>
+<div class="row-center" *ngIf="formatOneActive">
+  <div class="length-result">
+    {{countResult}}
+  </div>
+  <div class="col-auto">
+    Data has been found from your JSON.
+  </div>
+</div>   
+<!--Format ONE-->
+
+<!--Format TWO-->
+<div class="row-around" *ngIf="formatTwoActive">
+  <div class="col-7-2">
+    <textarea class="text-field-two" #jsonInput id="jsonTextArea"></textarea>    
+  </div>
+  <div class="col-6 pa-1">
+    <button class="btn-primary ripple" style="height: 90px; font-size: xx-large;" (click)="getCount()">Start Counting!</button>
+    <button class="btn-secondary ripple" style="margin-top: 5px;height: 90px;font-size: xx-large;" (click)="activateUploadCountDisplay()">Load File Instead</button>
+    <button class="btn-grey ripple" style="margin-top: 5px;height: 90px;font-size: xx-large;" (click)="startOver($event); jsonInput.value=''">Start Over</button>
+    <br/>
+    
+    <div class="col-12 row-center">
+      <b style="font-size: x-large; margin-top: 10px;">RESULTS</b>
+    </div>
+    
+    <div class="col-12 row-center length-result-two" *ngIf="formatTwoActive">
+      <div style="color:#043927">
+        {{countResult}}
+      </div>      
+    </div>   
+    <div class="col-auto" style="font-size: xx-large;text-align: center;">
+      Data has been found from your JSON.
+    </div>
+  </div>
+</div>
+<!--Format TWO-->
+<!--PASTE AND COUNT-->
+
+<!--UPLOAD AND COUNT-->
+<div class="row-center" *ngIf="showUploadCountDisplay">
+  <div class="col-auto">
+    <h1 class="ma-1" style="color:#043927; font-weight: 700;text-align: center;">UPLOAD AND COUNT</h1>
+    <button class="btn-secondary ripple" style="margin-top: 5px;margin-bottom: 5px;" (click)="openFileInput();">Load File</button>
+    <p style="text-align: center;" *ngIf="isSuccessfullyLoaded">File upload is successful.</p>
+    <!-- File input and progress bar -->
+    <div *ngIf="showUploadCountDisplay">
+      <input type="file" id="jsonUploadTrigger" hidden (change)="uploadJsonFile($event)"/>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" [style.width.%]="progress">{{ progress }}%</div>
+      </div>
+    </div>
+    <textarea class="text-field" #jsonInput id="jsonTextArea" value="Text goes here" disabled></textarea>
+    <button *ngIf="isSuccessfullyLoaded" class="btn-secondary ripple" style="margin-top: 5px;margin-bottom: 5px;" (click)="getCount();">Count</button>
+    <button *ngIf="isSuccessfullyLoaded" class="btn-grey ripple" style="margin-top: 5px;margin-bottom: 5px;" (click)="startOverUpload(); jsonInput.value=''">Start Over</button>
+    <b style="font-size: x-large; margin-top: 10px;">RESULTS</b>
+    <div class="length-result-two" style="color:#043927; text-align: center;">
+      {{countResult}}
+    </div> 
+    <div style="font-size: xx-large;text-align: center;">
+      Data has been found from your JSON.
+    </div>
+  </div>  
+</div>
+<!--UPLOAD AND COUNT-->
+
+
+<!--File Input-->
+  <input type="file" id="jsonUploadTrigger" hidden (change)="uploadJsonFile($event)"/>
+<!--File Input-->
+

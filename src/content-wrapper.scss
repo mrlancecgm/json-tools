@@ -1,0 +1,16 @@
+// content-wrapper.scss
+
+// Define a mixin to set the styles for covering the viewport
+@mixin cover-viewport {
+    width: 100vw;   // Set width to cover the viewport width
+    height: 100vh;  // Set height to cover the viewport height
+  }
+  
+  // Style for the content wrapper
+  .content-wrapper {
+    @include cover-viewport;  // Apply the mixin to cover the viewport
+  
+    // Add any additional styles as needed
+    background-color: #f0f0f0; // For example, setting background color
+  }
+  
