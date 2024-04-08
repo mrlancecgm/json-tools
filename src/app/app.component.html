@@ -1,3 +1,15 @@
 <app-header></app-header>
-<app-converter></app-converter>
+<div>
+    <a class="btn btn-grey ml-1 ripple" (click)="toggleConverter()">
+      <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i>
+      <span class="d-none d-sm-inline-block" style="color: rgb(0, 0, 0);">Toggle</span>
+    </a>
+    <div *ngIf="toggle">
+        <app-converter></app-converter>
+      </div>
+      <div *ngIf="!toggle">
+        <app-exceljson></app-exceljson>
+      </div>
+  </div>
+
 <app-footer></app-footer>

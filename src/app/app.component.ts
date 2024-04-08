@@ -8,5 +8,9 @@ import { VirtualAction } from 'rxjs';
   encapsulation: ViewEncapsulation.None 
 })
 export class AppComponent {
-  title = 'angular_training';
+  toggle: boolean = false;
+
+  toggleConverter(): void{
+    this.toggle = !this.toggle;
+  }
 }
