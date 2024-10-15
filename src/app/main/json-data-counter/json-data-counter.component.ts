@@ -1,12 +1,11 @@
-import { Component, ElementRef, OnInit, SimpleChange, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ElementRef, SimpleChanges, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
+  selector: 'app-json-data-counter',
+  templateUrl: './json-data-counter.component.html',
+  styleUrls: ['./json-data-counter.component.scss']
 })
-export class MainComponent implements OnInit {
+export class JsonDataCounterComponent {
   public countResult?=0;
   public showInitialDisplay?:boolean=true;
   public showUploadCountDisplay?:boolean=false;
@@ -16,12 +15,13 @@ export class MainComponent implements OnInit {
   public progress: number = 0;
   public isSuccessfullyLoaded?:boolean=false;
   public fileValue?: File;
+  public hasFileUploaded?: boolean=false;
 
   @ViewChild("jsonInput") jsonInput?: ElementRef;
 
   jsonData:any;
   dataCount:number=0;
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {
   }
@@ -74,6 +74,7 @@ export class MainComponent implements OnInit {
     const file: File = event.target.files[0];
     console.log("File Uploaded",event.target)
     if (file) {
+      this.hasFileUploaded = true;
       this.readFile(file);      
     }
   }  
@@ -126,26 +127,6 @@ export class MainComponent implements OnInit {
       this.countResult=this.dataCount;
     }    
   }  
-
-  goToJsonCounter() {
-    this.router.navigate(['/json-data-counter']);
-  }
-
-  goToJsonExcel() {
-    this.router.navigate(['/json-to-excel']);
-  }
-
-  goToExcelJson() {
-    this.router.navigate(['/excel-to-json']);
-  }
-
-  goToJsonFormatter() {
-    this.router.navigate(['/json-formatter']);
-  }
-
-  goToJsonSplitter() {
-    this.router.navigate(['/json-data-splitter']);
-  }
 
   ngOnChanges(changes:SimpleChanges){
     this.progress = changes['progress'].currentValue();

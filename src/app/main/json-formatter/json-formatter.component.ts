@@ -1,12 +1,13 @@
-import { Component, ElementRef, OnInit, SimpleChange, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectorRef, Component, ElementRef, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
+import { parse } from 'path';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
+  selector: 'app-json-formatter',
+  templateUrl: './json-formatter.component.html',
+  styleUrls: ['./json-formatter.component.scss']
 })
-export class MainComponent implements OnInit {
+export class JsonFormatterComponent {
+  public keyArray?:any[]=[];
   public countResult?=0;
   public showInitialDisplay?:boolean=true;
   public showUploadCountDisplay?:boolean=false;
@@ -16,12 +17,15 @@ export class MainComponent implements OnInit {
   public progress: number = 0;
   public isSuccessfullyLoaded?:boolean=false;
   public fileValue?: File;
+  public hasFileUploaded?: boolean=false;
+  public activateFormatButton?:boolean=false;
 
   @ViewChild("jsonInput") jsonInput?: ElementRef;
+  @ViewChild("jsonOutput") jsonOutput?: ElementRef;
 
   jsonData:any;
   dataCount:number=0;
-  constructor(private router: Router) {}
+  constructor(private renderer: Renderer2, private cdref: ChangeDetectorRef) {}
 
   ngOnInit(): void {
   }
@@ -50,15 +54,6 @@ export class MainComponent implements OnInit {
     }
   }
   
-  activateFormatOne() {
-    this.formatOneActive = !this.formatOneActive;
-  }
-
-  activateFormatTwo() {
-    this.formatTwoActive = !this.formatTwoActive;
-    this.formatOneActive = !this.formatOneActive;
-  }
-
   activateUploadCountDisplay(){
     this.showInitialDisplay = !this.showInitialDisplay;
     this.showUploadCountDisplay = !this.showUploadCountDisplay;
@@ -74,6 +69,7 @@ export class MainComponent implements OnInit {
     const file: File = event.target.files[0];
     console.log("File Uploaded",event.target)
     if (file) {
+      this.hasFileUploaded = true;
       this.readFile(file);      
     }
   }  
@@ -111,6 +107,55 @@ export class MainComponent implements OnInit {
     reader.readAsText(file);
   }
 
+  formatJson() {
+    let jsonToFormat = this.jsonInput?.nativeElement.value;
+    let parseJson = JSON.parse(jsonToFormat);
+    let formattedJson = JSON.stringify(parseJson);
+
+    let htmlString = this.generateHtml(parseJson);
+
+    if(this.jsonOutput){
+      this.jsonOutput.nativeElement.innerHTML = htmlString;
+    }
+  }
+
+  generateHtml(json: any): string {
+    let html = '';
+  
+    const generateHtmlRecursive = (obj: any, indent = 0, isArray = false) => {
+      const indentStr = '&nbsp;'.repeat(indent * 2);
+      if (Array.isArray(obj)) {
+        html += '[<br>';
+        obj.forEach((item) => {
+          if (typeof item === 'object' && item !== null) {
+            html += `${indentStr}`;
+            generateHtmlRecursive(item, indent + 1, Array.isArray(item));
+          } else {
+            html += `${indentStr}${item},<br>`;
+          }
+        });
+        html += `${indentStr}]<br>`;
+      } else {
+        html += '{<br>';
+        for (let key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            let displayKey = `<strong>${key}</strong>: `;
+            if (typeof obj[key] === 'object' && obj[key] !== null) {
+              html += `${indentStr}${displayKey}`;
+              generateHtmlRecursive(obj[key], indent + 1, Array.isArray(obj[key]));
+            } else {
+              html += `${indentStr}${displayKey}${obj[key]}<br>`;
+            }
+          }
+        }
+        html += `${indentStr}}<br>`;
+      }
+    };
+  
+    generateHtmlRecursive(json);
+    return html;
+  } 
+  
   getCount(){
     let jsonData = this.jsonInput?.nativeElement.value;    
     let parsedJsonData = JSON.parse(jsonData);
@@ -127,24 +172,24 @@ export class MainComponent implements OnInit {
     }    
   }  
 
-  goToJsonCounter() {
-    this.router.navigate(['/json-data-counter']);
+  ngAfterContentChecked() {
+    if (this.jsonInput?.nativeElement.value){
+      this.activateFormatButton = !this.activateFormatButton;
+    }
+    this.cdref.detectChanges();
   }
 
-  goToJsonExcel() {
-    this.router.navigate(['/json-to-excel']);
+  resetFields(){
+    if (this.jsonInput?.nativeElement.value){
+      this.jsonInput.nativeElement.value = !this.jsonInput.nativeElement.value;
+    }
+    this.clearOutput();
   }
 
-  goToExcelJson() {
-    this.router.navigate(['/excel-to-json']);
-  }
-
-  goToJsonFormatter() {
-    this.router.navigate(['/json-formatter']);
-  }
-
-  goToJsonSplitter() {
-    this.router.navigate(['/json-data-splitter']);
+  clearOutput(){
+    if (this.jsonOutput?.nativeElement.innerHTML){
+      this.jsonOutput.nativeElement.innerHTML = null;
+    }  
   }
 
   ngOnChanges(changes:SimpleChanges){

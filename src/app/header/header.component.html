@@ -1,4 +1,28 @@
-<img class="header-img" src="./assets/images/logo/jobscloud-removebg-preview.png"/><h1>JSON Data Counter</h1>
-<div style = "color: white;">
-    {{dateToday | date: 'dd MMMM y, h:mm:ss a'}}
+<div class="col-4 d-flex align-items-center">
+    <button style="border: none; background: none;" routerLink="/" routerLinkActive="active"><img class="header-img" src="./assets/images/logo/json2_copy.jpg"/></button>
+    <div mdbDropdown class="dropdown">
+        <button class="btn-transparent btn-white " type="button" id="dropdownMenuButton" aria-expanded="false" mdbDropdownToggle (click)="toggleDropdown()">
+            All Tools <i style="color: #043927;" class="fas fa-fw fa-angle-down"></i>
+        </button>
+        <ul *mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#" routerLink="/json-data-counter" routerLinkActive="active">JSON Data Counter</a></li>
+            <li><a class="dropdown-item" href="#">Excel to JSON Converter</a></li>
+            <li><a class="dropdown-item" href="#" routerLink="/json-to-excel" routerLinkActive="active">JSON to Excel Converter</a></li>
+            <li><a class="dropdown-item" href="#" routerLink="/json-data-splitter" routerLinkActive="active">JSON Data Splitter</a></li>
+          </ul>
+    </div>
+    <button class="btn-transparent btn-white">About JSON Tools</button>
 </div>
+
+<div class="col-4" style="justify-content: center; text-align: center;">
+    
+</div>
+<div class="col-4" style="justify-content: end; text-align: end;">
+    <div style = "color: #043927;">
+        {{dateToday | date: 'dd MMMM y, h:mm:ss a'}}
+    </div>
+    
+</div>
+
+
+

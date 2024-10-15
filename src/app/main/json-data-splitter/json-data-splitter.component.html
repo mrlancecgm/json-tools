@@ -1,0 +1,97 @@
+<!--Initial Display-->
+<div
+  *ngIf="!hasFileUploaded && !isSuccessfullyLoaded"
+  class="row-center"
+  style="margin-top: auto; margin-bottom: auto"
+>
+  <div class="col-6" style="display: inline-block">
+    <div class="row-around">
+      <img src="assets/images/logo/json_splitter_logo.png" width="50%" />
+    </div>
+    <h1
+      class="ma-1"
+      style="color: #043927; font-weight: 700; text-align: center"
+    >
+      JSON DATA SPLITTER
+    </h1>
+    <input
+      type="file"
+      (change)="onFileChange($event)"
+      style="display: none"
+      id="jsonUploadTrigger"
+      #fileInput
+      accept=".json"
+    />
+    <button
+      class="btn-primary ripple mb-1"
+      style="height: 50px"
+      (click)="openFileInput()"
+    >
+      Upload File
+    </button>
+  </div>
+</div>
+<!--Initial Display-->
+
+<!--Loading Display-->
+<div
+  *ngIf="hasFileUploaded && !isSuccessfullyLoaded"
+  class="row-center"
+  style="margin-top: auto; margin-bottom: auto"
+>
+  <div class="col-6" style="display: inline-block">
+    <div class="row-around">
+      <img src="assets/images/logo/json_splitter_logo.png" width="50%" />
+    </div>
+    <h1
+      class="ma-1"
+      style="color: #043927; font-weight: 700; text-align: center"
+    >
+      JSON DATA SPLITTER
+    </h1>
+    <div class="length-result-two" style="font-size:30px;line-height:30px;">
+      <div
+        class="ma-1"
+        style="color: #043927; font-weight: 700; text-align: center"
+      >
+        Please wait as your JSON File is being converted...
+    </div>   
+    </div>
+  </div>
+</div>
+<!--Loading Display-->
+
+<div *ngIf="hasFileUploaded && isSuccessfullyLoaded" class="content-wrapper container-xxl p-0">
+  <div class="row-around" style="display:flex;justify-content: center;">
+    <img src="assets/images/logo/json_splitter_logo.png" width="20%"/>    
+  </div>
+  <div class="length-result-two" style="font-size:30px;line-height:30px;">
+    <div
+      class="ma-1"
+      style="color: #043927; font-weight: 700; text-align: center"
+    >
+      JSON DATA SPLITTER
+  </div>   
+  </div>
+</div>
+
+<div class="col-12 row-center length-result-two" *ngIf="hasFileUploaded">
+    <div style="color:#043927">
+      {{countResult}}
+    </div>      
+  </div>   
+  <div class="col-auto" style="font-size: xx-large;text-align: center;" *ngIf="hasFileUploaded">
+    Data has been found from your JSON.
+  </div>
+
+<!--UPLOAD AND COUNT-->
+<div class="row-center" *ngIf="hasFileUploaded && isSuccessfullyLoaded">
+  <div class="col-7-2">
+    <textarea class="text-field" id="jsonTextArea" [value]="jsonPreview" readonly></textarea>   
+    <div class="col-12">
+      <button class="btn-secondary ripple" *ngIf="jsonPreview"
+      (click)="downloadExcel()" style="margin-top: 5px;margin-bottom: 5px; margin-right: 2px;">Download XLSX File</button>
+    </div>
+  </div>  
+</div>
+<!--UPLOAD AND COUNT-->

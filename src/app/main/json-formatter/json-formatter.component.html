@@ -1,0 +1,91 @@
+<!--Format TWO-->
+<!-- <div class="row-around">
+  <div style="justify-content: space-between; height: max-content;" class="col-4">
+        <textarea class="text-field-two" #jsonInput id="jsonTextArea"></textarea> 
+  </div>
+  <button class="btn-primary col-4" style="margin-left: 10px; margin-right: 10px;">Format!</button>
+  <div style="justify-content: space-between;" class="col-4">
+        <textarea class="text-field-two" #jsonInput id="jsonTextArea"></textarea>  
+  </div>
+</div> -->
+
+<div class="col-4">
+  <label class="json-label">INPUT JSON</label>
+  <button
+                  class="btn"
+                  ripple
+                >
+                  <i
+                    data-feather="trash"
+                    class="d-sm-none d-inline-block mr-0 mr-sm-1"
+                  ></i>
+  
+                  <span class="d-none d-sm-inline-block">Delete All</span>
+                </button>
+  <textarea class="text-field-formatter" #jsonInput id="jsonTextInput"></textarea> 
+</div>
+<div class="col-4" style="text-align: center;">
+  <div>
+    <input type="file" id="jsonUploadTrigger" hidden (change)="uploadJsonFile($event)"/>
+    <button class="btn-primary-formatter ma-1 pa-1 ripple" id="jsonUploadTrigger" (click)="openFileInput()">UPLOAD FILE</button><br/>
+    <button class="btn-primary-formatter ma-1 pa-1 ripple" (click)="formatJson()" [disabled]="!activateFormatButton">FORMAT JSON!</button><br/>
+    <button class="btn-primary-formatter ma-1 pa-1 ripple" (click)="resetFields()">RESET</button>
+  </div>  
+</div>
+<div class="col-4" style="margin-left: 5px;">
+  <div style="text-align: end;">
+    <label class="json-label">OUTPUT JSON</label>
+  </div>  
+  <div class="div-textarea" #jsonOutput id="jsonTextOutput"></div>
+</div>
+
+<!-- <div class="col-4">
+  <textarea class="text-field-two" #jsonInput id="jsonTextArea"></textarea>  
+</div>
+<div class="col-4">
+  <textarea class="text-field-two" #jsonInput id="jsonTextArea"></textarea>  
+</div>
+<div class="col-4">
+  <textarea class="text-field-two" #jsonInput id="jsonTextArea"></textarea>  
+</div> -->
+<!--Format TWO-->
+<!--PASTE AND COUNT-->
+
+<!--UPLOAD AND COUNT-->
+<div class="row-center" *ngIf="showUploadCountDisplay">
+  <div class="col-auto">
+    <h1 class="ma-1" style="color:#043927; font-weight: 700;text-align: center;">UPLOAD AND COUNT</h1>
+    <button class="btn-secondary ripple" style="margin-top: 5px;margin-bottom: 5px;" (click)="openFileInput();">Load File</button>
+    <p style="text-align: center;" *ngIf="hasFileUploaded && isSuccessfullyLoaded">File upload is successful.</p>
+    <p style="text-align: center;" *ngIf="hasFileUploaded && !isSuccessfullyLoaded">Loading JSON File...</p>
+    <!-- File input and progress bar -->
+    <div *ngIf="showUploadCountDisplay">
+      <input type="file" id="jsonUploadTrigger" hidden (change)="uploadJsonFile($event)"/>
+    </div>
+    <textarea class="text-field" #jsonInput id="jsonTextArea" value="Text goes here" disabled></textarea>
+    <div class="d-flex">
+    <div class="col-6">
+      <button *ngIf="isSuccessfullyLoaded" class="btn-secondary ripple" style="margin-top: 5px;margin-bottom: 5px; margin-right: 2px;" (click)="getCount();">Count</button>
+    </div>
+    <div class="col-6">
+      <button *ngIf="isSuccessfullyLoaded" class="btn-grey ripple" style="margin-top: 5px;margin-bottom: 5px;margin-left: 2px;" (click)="startOverUpload(); jsonInput.value=''">Start Over</button>
+    </div>  
+  </div>
+    <div class="col-12">
+    <b style="font-size: x-large; margin-top: 5px;">RESULTS</b>
+    <div class="length-result-two" style="color:#043927; text-align: center;">
+      {{countResult}}
+    </div> 
+    <div style="font-size: x-large;text-align: center;">
+      Data has been found from your JSON.
+    </div>
+    </div>
+  </div>  
+</div>
+<!--UPLOAD AND COUNT-->
+
+
+<!--File Input-->
+  <input type="file" id="jsonUploadTrigger" hidden (change)="uploadJsonFile($event)"/>
+<!--File Input-->
+

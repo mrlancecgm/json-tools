@@ -4,16 +4,28 @@ import { Component, OnInit, DoCheck, SimpleChanges, OnChanges } from '@angular/c
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, DoCheck, OnChanges {
   
   public dateToday?: Date;
+  public isDropdownOpen?:boolean = false;
 
   constructor() { 
   }
 
   ngOnInit(): void {    
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    console.log("Browser screen width:", screenWidth);
+    console.log("Browser screen height:", screenHeight);
+
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+    console.log("Dropdown Toggle is: ", this.isDropdownOpen);
   }
 
   setTime() {
