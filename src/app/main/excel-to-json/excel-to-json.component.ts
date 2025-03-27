@@ -47,9 +47,9 @@ export class ExcelToJsonComponent {
         this.jsonData = XLSX.utils.sheet_to_json(sheet);
         console.log(this.jsonData);
         this.jsonPreview = JSON.stringify(this.jsonData, null, 2);
-        this.jsonData.forEach((a:any) => {
-          a.memberCode = a.memberCode.toString();
-        });
+        // this.jsonData.forEach((a:any) => {
+        //   a.memberCode = a.memberCode.toString();
+        // });
         this.countResult = this.jsonData.length;
       };
       reader.readAsArrayBuffer(file);

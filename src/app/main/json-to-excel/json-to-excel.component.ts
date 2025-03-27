@@ -70,4 +70,8 @@ export class JsonToExcelComponent {
       console.error('JSON data is empty or invalid');
     }
   }
+
+  ngDoCheck(){
+    console.log("Progress: ", this.progress);
+  }
 }

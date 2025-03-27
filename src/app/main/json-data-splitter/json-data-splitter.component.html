@@ -84,13 +84,30 @@
     Data has been found from your JSON.
   </div>
 
+  <div *ngIf="hasFileUploaded" class="row-center mb-1">
+    <label>Enter length for division: </label>
+    <input 
+      id = "lengthJson"
+      name = "lengthJson"    
+      #lengthJson  
+    />
+  </div>
+  <div *ngIf="hasFileUploaded" class="row-center">
+    <label>File name for files </label>
+    <input 
+      id = "fileNameRequest"
+      name = "fileNameRequest"    
+      #fileNameRequest  
+    />
+  </div>
+
 <!--UPLOAD AND COUNT-->
 <div class="row-center" *ngIf="hasFileUploaded && isSuccessfullyLoaded">
   <div class="col-7-2">
-    <textarea class="text-field" id="jsonTextArea" [value]="jsonPreview" readonly></textarea>   
+    <!-- <textarea class="text-field" id="jsonTextArea" [value]="jsonPreview" readonly></textarea>    -->
     <div class="col-12">
       <button class="btn-secondary ripple" *ngIf="jsonPreview"
-      (click)="downloadExcel()" style="margin-top: 5px;margin-bottom: 5px; margin-right: 2px;">Download XLSX File</button>
+      (click)="downloadJson()" style="margin-top: 5px;margin-bottom: 5px; margin-right: 2px;">Download Splitted Files</button>
     </div>
   </div>  
 </div>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import * as XLSX from 'xlsx';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { saveAs } from 'file-saver';
+import * as JSZip from 'jszip';
 
 @Component({
   selector: 'app-json-data-splitter',
@@ -14,28 +15,26 @@ export class JsonDataSplitterComponent implements OnInit {
   countResult?: number = 0;
   hasFileUploaded?: boolean = false;
   isSuccessfullyLoaded?: boolean = false;
-  progress: number=0;
+  progress: number = 0;
   fileName?: string;
+  fileCollection?: any[];
 
-
-  // @ViewChild("fileInput") fileInput?: ElementRef;
+  @ViewChild("lengthJson") lengthJson?: ElementRef;
+  @ViewChild("fileNameRequest") fileNameRequest?: ElementRef;
 
   constructor() { }
 
-  onFileChange(event: any) {    
+  onFileChange(event: any) {
     const file = event.target.files[0];
     const fileName = file.name.toLowerCase();
-    const newFileName = fileName.replace(".json",".xlsx");
-    this.fileName = newFileName;
     if (fileName.endsWith('.json')) {
       this.hasFileUploaded = true;
       const reader = new FileReader();
 
-      // Set up progress event listener
       reader.onprogress = (event) => {
         if (event.lengthComputable) {
           this.progress = Math.round((event.loaded / event.total) * 100);
-          if(this.progress === 100){
+          if (this.progress === 100) {
             this.isSuccessfullyLoaded = true;
           }
         }
@@ -53,43 +52,83 @@ export class JsonDataSplitterComponent implements OnInit {
   }
 
   openFileInput() {
-    document.getElementById("jsonUploadTrigger")?.click();    
+    document.getElementById("jsonUploadTrigger")?.click();
   }
 
-  // getCount(){
-  //   let jsonData = this.jsonInput?.nativeElement.value;    
-  //   let parsedJsonData = JSON.parse(jsonData);
-  //   let jsonTitle:any = Object.keys(parsedJsonData)[0];
-  //   console.log("JSON Title", typeof(jsonTitle));
-  //   if (jsonTitle !== "0"){
-  //     this.countResult = parsedJsonData[jsonTitle].length;
-  //   }
-  //   else{
-  //     this.dataCount = Array.isArray(parsedJsonData) ? parsedJsonData.length : 0;
-  //     console.log('JSON data:', parsedJsonData);
-  //     console.log('Data count:', this.dataCount);
-  //     this.countResult=this.dataCount;
-  //   }    
-  // }  
-
-  downloadExcel() {
-    console.log("JSON Data: ", this.jsonData);
-    console.log("JSON Length: ", this.jsonData.length);
-    console.log("File Name: ", this.fileName);
-    if (this.jsonData && this.jsonData.length > 0) {
-      const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.jsonData);
-      const wb: XLSX.WorkBook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-      XLSX.writeFile(wb, this.fileName ? this.fileName : "");
-      window.location.reload();
+  dl(data: any[]) {
+    if (data) {
+      const jsonContent = JSON.stringify(data, null, 2);
+      const blob = new Blob([jsonContent], { type: 'application/json' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.href = url;
+      a.download = this.fileName ? this.fileName : "";
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
     } else {
-      console.log("JSON Data: ", this.jsonData);
       console.error('JSON data is empty or invalid');
     }
   }
 
-  ngOnInit(): void {
-      
+  downloadJson() {
+    const valueee = this.lengthJson?.nativeElement.value;
+    this.fileName = (this.fileNameRequest?.nativeElement.value) + '.json';
+    let requestLength: number = parseInt(valueee, 10);
+    let obj: { [key: string]: any[] } = {};
+    let currentArray: any[] = [];
+    let maxLength = requestLength;
+    let arrayCounter = 1;
+    let jsonLength = this.jsonData.length;
+    let remainder = jsonLength % requestLength;
+    let whole = Math.floor(jsonLength / requestLength);
+    whole = remainder !== 0 ? whole + 1 : whole;
+
+    console.log("Remainder: ", remainder);
+    console.log("WHOLE: ", whole);
+
+    let arrayName = "";
+
+    for (let a = 0; a !== whole; a++) {
+      arrayName = `array${arrayCounter}`;
+      obj[arrayName] = [];
+      currentArray = obj[arrayName];
+      arrayCounter++;
+    }
+
+    let a = 1;
+    console.log("OBJ b4: ", obj);
+    for (let i = 0; i < this.jsonData.length; i++) {
+      let arrayName2 = `array${a}`;
+      obj[arrayName2].push(this.jsonData[i]);
+      if (obj[arrayName2].length === requestLength) {
+        a++;
+      }
+    }
+    console.log("OBJECT: ", obj);
+
+
+    const finalLength = Object.keys(obj).length;
+    this.downloadAsZIP(obj, finalLength);
   }
 
+  downloadAsZIP(jsonFile:{[key: string]: any[]}, arrayLength:number){    
+    const zip = new JSZip();
+
+    const fileNameZip = this.fileName?.replace('.json','');
+
+    for (let m = 1; m <= arrayLength; m++) {      
+      const toDL = `array${m}`;
+      console.log("Array to DL: ", toDL);
+      const jsonContent = JSON.stringify(jsonFile[toDL], null, 2);
+      zip.file(`${fileNameZip}${m}.json`, jsonContent); 
+    }
+
+    zip.generateAsync({ type: 'blob' }).then((content: Blob) => {
+      saveAs(content, `${fileNameZip}.zip`); 
+    });
+  }
+
+  ngOnInit(): void { }
 }
